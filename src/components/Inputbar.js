@@ -46,7 +46,6 @@ export default function Inputbar(props){
         <InputRightElement width='4.5rem'>
             <Button
             onClick={handleClick}
-           
             >
             Submit
         </Button>
