@@ -2,9 +2,9 @@ import * as React from 'react';
 import { InputGroup, Input, Button, InputRightElement } from '@chakra-ui/react'
 import { useToast } from '@chakra-ui/react';
 import {useSelector, useDispatch} from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
 
-export default function Inputbar(props){
+const Inputbar=(props)=>{
     const toast = useToast();
     const dispatch = useDispatch();
     const [message, setMessage] = React.useState('')
@@ -13,17 +13,24 @@ export default function Inputbar(props){
       setMessage(event.target.value)
     }
 
-    const handleClick =(event)=>{
-        // console.log(`Submitted ${event.target.value}`)
-        event.preventDefault();
-        dispatch({type: 'task/increment', payload: {id: uuidv4().toString(), text: message}});
-        toast({
-            title: 'Task Added',
-            description: "A Task's Added",
-            status: 'success',
-            duration: 9000,
-            isClosable: true,
-          })
+    const handleClick = async (event)=>{
+        // console.log(`Submitted ${event.target.value}`)\
+        try{
+          event.preventDefault();
+          const {data} = await axios.post('http://localhost:8000/api/v1/tasks/create', {text: message})
+          console.log(JSON.stringify(data))
+          dispatch({type: 'task/increment', payload: { _id: data.data.task._id, text: message}});
+          toast({
+              title: 'Task Added',
+              description: "A Task's Added",
+              status: 'success',
+              duration: 9000,
+              isClosable: true,
+            })
+        } catch(err){
+          console.log(err)
+        }
+
     }
     const handleEnter=(event)=>{
       if (event.key === 'Enter') handleClick(event)
@@ -53,3 +60,5 @@ export default function Inputbar(props){
       </InputGroup>
     )
 }
+
+export default Inputbar;

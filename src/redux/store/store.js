@@ -8,9 +8,10 @@ import logger from 'redux-logger';
 import { configureStore } from '@reduxjs/toolkit';
 import taskReducer from '../reducer/reducer';
 
+
 export default configureStore({
   reducer: {taskReducer},
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck: false}).concat(logger),
   devTools: process.env.NODE_ENV !== 'production',
 })
  

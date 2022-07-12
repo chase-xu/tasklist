@@ -1,25 +1,48 @@
 // import logo from './logo.svg';
 import React from 'react';
 import './App.css';
-import {BrowserRouter, Switch} from 'react-router-dom';
+import {Switch} from 'react-router-dom';
 import Inputbar from './components/Inputbar';
 import Taskbar from './components/Taskbar';
 import {useSelector, useDispatch} from 'react-redux';
+import axios from 'axios';
+// import getAllTasks from './fetch/getAllTasks';
+// import store from './redux/store/store'
 
+
+// store.dispatch(getAllTasks())
+const  getAllTasks=()=> {
+  return async dispatch => {
+      try {
+          const  res = await axios.get("http://localhost:8000/api/v1/tasks")
+          dispatch({type: 'task/getAll', payload: res.data}) //store first five posts
+      }
+      catch(e){
+          console.log(e)
+      }
+  }
+}
 
 function App() {
 
   const tasks = useSelector((state)=>{
-    console.log(state)
     return state.taskReducer.tasks
   })
-  
+  const dispatch = useDispatch();
+  const [initRender, setInitRender] = React.useState(true)
+
   React.useEffect(()=>{
-  },[tasks])
+    if(initRender) {
+      dispatch(getAllTasks())
+      setInitRender(false)
+    };
+  },[initRender, tasks, dispatch])
+
   
 
   return (
     <Switch>
+      <React.Fragment >
       <div>
         <header style={{
           textAlign:'center',
@@ -40,15 +63,16 @@ function App() {
         <div className='App' style={{
           border: '1px solid',
           marginTop: '10%',
-          height: '20em',
+          minHeight: '20em',
           borderBottom: '16px solid',
           borderRight: '12px solid'}}>
-            {tasks.length===0 ?<></> : tasks.map((task)=> 
-                <Taskbar desc={task} />
+            {tasks === undefined || tasks.length === 0   ? <></> : tasks.map((task, index)=> 
+                  <Taskbar desc={task} key={index}/>
             )}
         </div>
       </div>
       </div>
+      </React.Fragment>
     </Switch>
   );
 }
