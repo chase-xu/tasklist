@@ -18,9 +18,7 @@ const taskReducer = createReducer(initialState, async (builder) => {
         const data = state.tasks.filter((item, index)=>{
                 return item._id !== action.payload._id
         })
-        // console.log(data)
         return {...state, tasks: data}
-        // }
       } catch(err){
         console.log(err)
       }

@@ -6,11 +6,9 @@ import Inputbar from './components/Inputbar';
 import Taskbar from './components/Taskbar';
 import {useSelector, useDispatch} from 'react-redux';
 import axios from 'axios';
-// import getAllTasks from './fetch/getAllTasks';
-// import store from './redux/store/store'
 
 
-// store.dispatch(getAllTasks())
+
 const  getAllTasks=()=> {
   return async dispatch => {
       try {

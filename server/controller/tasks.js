@@ -1,12 +1,9 @@
 const Task = require('../model/Task')
 const asyncWrapper = require('../middleware/asyncWrapper')
-// const next = require('express')
 
 const getAllTasks = asyncWrapper (async (req, res)=>{
-
     const tasks = await Task.find({})
     res.status(200).json(tasks)
-    
 })
 
 const createTask = asyncWrapper(async (req, res)=>{
@@ -20,7 +17,6 @@ const deleteTask = asyncWrapper( async (req, res, next)=>{
     console.log(req.params)
     const id = req.params.id
     const task = await Task.findOneAndDelete({_id: id})
-    console.log(task)
     if(!task){
         const error = new Error(`Deleting task not exist with id: ${id}`)
         error.status = 404
