@@ -19,12 +19,12 @@ app.use(express.json());
 app.use('/api/v1/tasks', tasks);
 
 // middleware 
+app.use(rateLimit)
 app.use(notFound)
 app.use(errorHandler)
-app.use(rateLimit)
 
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 7070;
 
 const start = async ()=>{
     try{

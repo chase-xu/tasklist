@@ -1,5 +1,4 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
-import axios from 'axios';
 
 const increment = createAction('task/increment')
 const decrement = createAction('task/decrement')
