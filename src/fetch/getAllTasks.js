@@ -13,7 +13,7 @@ import axios from 'axios';
 export default function getAllTasks() {
     return async dispatch => {
         try {
-            const  res = await axios.get("http://localhost:8000/api/v1/tasks")
+            const  res = await axios.get("/api/v1/tasks")
             dispatch({type: 'task/getAll', payload: res}) //store first five posts
         }
         catch(e){

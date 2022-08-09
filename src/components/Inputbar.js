@@ -16,7 +16,7 @@ const Inputbar=(props)=>{
     const handleClick = async (event)=>{
         try{
           event.preventDefault();
-          const {data} = await axios.post('http://localhost:8000/api/v1/tasks/create', {text: message})
+          const {data} = await axios.post('/api/v1/tasks/create', {text: message})
           dispatch({type: 'task/increment', payload: { _id: data.data.task._id, text: message}});
           toast({
               title: 'Task Added',

@@ -9,7 +9,7 @@ const Feature=({ title, text, _id, ...rest })=> {
     const handleClick = async (event)=>{
         try{
             
-            const res = await axios.delete(`http://localhost:8000/api/v1/tasks/delete/${_id}`, {_id: _id, text: text})
+            const res = await axios.delete(`/api/v1/tasks/delete/${_id}`, {_id: _id, text: text})
             console.log(` return is ${res.data.data}`)
             if(res.data.data){
                 dispatch({type: 'task/decrement', payload: {_id: _id, text: text}})

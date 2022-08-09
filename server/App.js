@@ -24,7 +24,7 @@ app.use(notFound)
 app.use(errorHandler)
 
 
-const port = process.env.PORT || 7070;
+const port = process.env.PORT;
 
 const start = async ()=>{
     try{

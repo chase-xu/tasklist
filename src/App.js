@@ -6,13 +6,14 @@ import Inputbar from './components/Inputbar';
 import Taskbar from './components/Taskbar';
 import {useSelector, useDispatch} from 'react-redux';
 import axios from 'axios';
+import {useToast} from '@chakra-ui/react';
 
 
 
 const  getAllTasks=()=> {
   return async dispatch => {
       try {
-          const  res = await axios.get("http://localhost:8000/api/v1/tasks")
+          const  res = await axios.get("/api/v1/tasks")
           dispatch({type: 'task/getAll', payload: res.data}) //store first five posts
       }
       catch(e){
@@ -28,10 +29,22 @@ function App() {
   })
   const dispatch = useDispatch();
   const [initRender, setInitRender] = React.useState(true)
+  const toast = useToast();
 
   React.useEffect(()=>{
     if(initRender) {
-      dispatch(getAllTasks())
+      try{
+        dispatch(getAllTasks())
+      }catch(e){
+        toast({
+          title: 'Data Loading Error',
+          description: e.message,
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        })
+      }
+      
       setInitRender(false)
     };
   },[initRender, tasks, dispatch])
