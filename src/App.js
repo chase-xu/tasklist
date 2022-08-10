@@ -36,9 +36,10 @@ function App() {
       try{
         dispatch(getAllTasks())
       }catch(e){
+        console.log(e)
         toast({
-          title: 'Data Loading Error',
-          description: e.message,
+          title: e.message,
+          description: e.response.data.msg,
           status: 'error',
           duration: 9000,
           isClosable: true,

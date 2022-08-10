@@ -27,6 +27,14 @@ const Inputbar=(props)=>{
             })
         } catch(err){
           console.log(err)
+          toast({
+            title: err.message,
+            description: err.response.data.msg,
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          })
+          
         }
 
     }

@@ -2,10 +2,12 @@ import React from 'react';
 import { HStack, Box, Text, CloseButton } from '@chakra-ui/react';
 import {useSelector, useDispatch} from 'react-redux';
 import axios from 'axios';
+import {useToast} from '@chakra-ui/react';
 
 const Feature=({ title, text, _id, ...rest })=> {
 
     const dispatch = useDispatch();
+    const toast = useToast()
     const handleClick = async (event)=>{
         try{
             
@@ -16,6 +18,14 @@ const Feature=({ title, text, _id, ...rest })=> {
             }
           } catch(err){
             console.log(err)
+            toast({
+                title: err.message,
+                description: err.response.data.msg,
+                status: 'error',
+                duration: 9000,
+                isClosable: true,
+              })
+            
         }
         
     }
