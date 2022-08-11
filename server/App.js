@@ -26,7 +26,7 @@ app.use(notFound);
 app.use(errorHandler);
 // app.use(rateLimit);
 
-const port = 0;
+const port = process.env.PORT || 7070;
 const start = async ()=>{
     try{
         await connectDB(process.env.MONGO_URI)
