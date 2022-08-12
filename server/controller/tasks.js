@@ -9,7 +9,7 @@ const getAllTasks = asyncWrapper (async (req, res)=>{
 const createTask = asyncWrapper(async (req, res)=>{
     const task = await Task.create(req.body)
     //limit the task amout to 8
-    // if (task.length > 8) return res.status(400).json({'status': 'error', message: 'Amount of Tasks exceeded 8.'})
+    if (task.length > 8) return res.status(400).json({'status': 'error', message: 'Amount of Tasks exceeded 8.'})
     res.status(201).json({'status': 'success', data: {task, number: task.length}})
 
 })
