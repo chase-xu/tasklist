@@ -5,8 +5,8 @@ const {getAllTasks, createTask,deleteTask } = require('../controller/tasks')
 
 
 
-router.route('/').get(getAllTasks) 
-router.route('/create').post(createTask)
-router.route('/delete/:id').delete(deleteTask)
+router.route('/').get(getAllTasks, rateLimiterUsingThirdParty) 
+router.route('/create').post(createTask, rateLimiterUsingThirdParty)
+router.route('/delete/:id').delete(deleteTask, rateLimiterUsingThirdParty)
  
 module.exports = router 
