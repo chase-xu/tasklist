@@ -28,10 +28,16 @@ const Inputbar=(props)=>{
             })
           setMessage('')
         } catch(err){
-          // console.log(err)
+          console.log(err)
+          let msg = ""
+          if(err.response.data.msg){
+            msg = err.response.data.msg
+          }else{
+            msg = err.response.data
+          }
           toast({
             title: err.message,
-            description: err.response.data.msg,
+            description: msg,
             status: 'error',
             duration: 9000,
             isClosable: true,
