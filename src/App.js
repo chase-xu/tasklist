@@ -45,7 +45,6 @@ function App() {
           isClosable: true,
         })
       }
-      
       setInitRender(false)
     };
   },[initRender, tasks, dispatch])

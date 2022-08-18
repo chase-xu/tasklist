@@ -18,15 +18,17 @@ const Inputbar=(props)=>{
           event.preventDefault();
           const {data} = await axios.post('/api/v1/tasks/create', {text: message})
           dispatch({type: 'task/increment', payload: { _id: data.data.task._id, text: message}});
+          
           toast({
               title: 'Task Added',
-              description: "A Task's Added",
+              description: message,
               status: 'success',
               duration: 9000,
               isClosable: true,
             })
+          setMessage('')
         } catch(err){
-          console.log(err)
+          // console.log(err)
           toast({
             title: err.message,
             description: err.response.data.msg,

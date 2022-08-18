@@ -14,7 +14,8 @@ const taskReducer = createReducer(initialState, async (builder) => {
     })
     .addCase(decrement, (state, action) => {
       try{
-        const data = state.tasks.filter((item, index)=>{
+        console.log(action)
+        const data = state.tasks.filter(item=>{
                 return item._id !== action.payload._id
         })
         return {...state, tasks: data}

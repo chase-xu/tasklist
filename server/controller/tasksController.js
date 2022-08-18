@@ -17,13 +17,19 @@ const createTask = asyncWrapper(async (req, res)=>{
 const deleteTask = asyncWrapper( async (req, res, next)=>{
     console.log(req.params)
     const id = req.params.id
-    const task = await Task.findOneAndDelete({_id: id})
-    if(!task){
-        const error = new Error(`Deleting task not exist with id: ${id}`)
-        error.status = 404
-        return next(error)
+    try{
+        const task = await Task.findOneAndDelete({_id: id})
+        console.log(task)
+        if(!task){
+            const error = new Error(`Deleting task not exist with id: ${id}`)
+            error.status = 404
+            return next(error)
+        }
+        res.status(200).json({'status': 'success', data: task})
+    }catch(err){
+        console.log(err)
     }
-    res.status(200).json({'status': 'success', data: task})
+    
 } )
 
 module.exports = { 

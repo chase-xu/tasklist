@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const rateLimiterUsingThirdParty = require('../middleware/rateLimit')
-const {getAllTasks, createTask,deleteTask } = require('../controller/tasks')
+const {getAllTasks, createTask,deleteTask } = require('../controller/tasksController')
 
 
 

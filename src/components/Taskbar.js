@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import axios from 'axios';
 import {useToast} from '@chakra-ui/react';
 
-const Feature=({ title, text, _id, ...rest })=> {
+const Feature=({ text, _id, ...rest })=> {
 
     const dispatch = useDispatch();
     const toast = useToast()
@@ -12,7 +12,7 @@ const Feature=({ title, text, _id, ...rest })=> {
         try{
             
             const res = await axios.delete(`/api/v1/tasks/delete/${_id}`, {_id: _id, text: text})
-            console.log(` return is ${res.data.data}`)
+            // console.log(` return is ${res.data.data}`)
             if(res.data.data){
                 dispatch({type: 'task/decrement', payload: {_id: _id, text: text}})
             }
@@ -41,15 +41,15 @@ const Feature=({ title, text, _id, ...rest })=> {
   }
   
  const StackEx=(props)=> {
-    const [desc, setDesc] = React.useState(props.desc)
+    // const [desc, setDesc] = React.useState(props.desc)
     return (
         <div>
             <HStack spacing={8} style={{
                 marginLeft: '5%', marginRight: '5%', marginTop: '5%', marginBottom: '5%'
             }}>
                 <Feature
-                text={desc.text}
-                _id={desc._id}/>
+                text={props.desc.text}
+                _id={props.desc._id}/>
             </HStack>
         </div>
 
