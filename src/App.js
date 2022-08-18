@@ -65,9 +65,24 @@ function App() {
             fontFamily: 'Courier New'
           }}>Task List</h1>
         </header>
-      <div style={{marginTop: '5%',
+        
+        <div style={{marginTop: '5%',
+          marginLeft: '30%',
+          marginRight: '30%',
+          textAlign:'center',
+          fontSize: '20px',
+          fontWeight: '900',
+          fontFamily: 'Courier New'
+          }}>
+          <ul>
+            <li>Currently the rate limits of requests is 4 requests per minute.</li>
+          </ul>
+        </div>
+
+      <div style={{marginTop: '2%',
           marginLeft: '25%',
-          marginRight: '25%',}}>
+          marginRight: '25%',
+          marginBottom: '10%'}}>
         <div>
           <Inputbar />
         </div>
