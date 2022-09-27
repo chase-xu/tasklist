@@ -3,7 +3,10 @@ import { createAction, createReducer } from '@reduxjs/toolkit'
 const increment = createAction('task/increment')
 const decrement = createAction('task/decrement')
 const getAll = createAction('task/getAll')
-const initialState = {tasks: []}
+
+const initialState = {
+  tasks: []
+}
 
 
 const taskReducer = createReducer(initialState, async (builder) => {

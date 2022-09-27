@@ -7,7 +7,7 @@ import Taskbar from './components/Taskbar';
 import {useSelector, useDispatch} from 'react-redux';
 import axios from 'axios';
 import {useToast} from '@chakra-ui/react';
-
+import Login from './components/Login';
 
 
 const  getAllTasks=()=> {
@@ -55,9 +55,18 @@ function App() {
     <Switch>
       <React.Fragment >
       <div>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          minHeight: '3em',
+        }}>
+          <Login/>
+        </div>
+        
         <header style={{
           textAlign:'center',
-          marginTop: '5%',
+          marginTop: '2%',
         }}>
           <h1 style={{
             fontSize: '50px',
@@ -66,7 +75,7 @@ function App() {
           }}>Task List</h1>
         </header>
         
-        <div style={{marginTop: '5%',
+        <div style={{marginTop: '1%',
           marginLeft: '30%',
           marginRight: '30%',
           textAlign:'center',
@@ -75,27 +84,29 @@ function App() {
           fontFamily: 'Courier New'
           }}>
           <ul>
-            <li>Currently the rate limits of requests is 4 requests per minute.</li>
+            <li>Currently the rate limits of requests is 6 requests per minute.</li>
           </ul>
         </div>
 
-      <div style={{marginTop: '2%',
+      <div style={{
           marginLeft: '25%',
           marginRight: '25%',
           marginBottom: '10%'}}>
         <div>
           <Inputbar />
         </div>
-        <div className='App' style={{
-          border: '1px solid',
-          marginTop: '10%',
-          minHeight: '20em',
-          borderBottom: '16px solid',
-          borderRight: '12px solid'}}>
-            {tasks === undefined || tasks.length === 0   ? <></> : tasks.map((task, index)=> 
-                  <Taskbar desc={task} key={index}/>
-            )}
-        </div>
+        <React.Fragment>
+          <div className='App' style={{
+            border: '1px solid',
+            marginTop: '5%',
+            minHeight: '20em',
+            borderBottom: '16px solid',
+            borderRight: '12px solid'}}>
+              {tasks === undefined || tasks.length === 0   ? <></> : tasks.map((task, index)=> 
+                    <Taskbar desc={task} key={index}/>
+              )}
+          </div>
+        </React.Fragment>
       </div>
       </div>
       </React.Fragment>

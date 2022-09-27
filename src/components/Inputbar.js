@@ -54,7 +54,7 @@ const Inputbar=(props)=>{
       <InputGroup size='md' style={{
             marginLeft: '10%', marginRight: '10%',
             width: '80%',
-            marginTop: '15%'
+            marginTop: '10%'
         }}>
         <Input
           pr='4rem'

@@ -9,6 +9,7 @@ const rateLimit = require('./middleware/rateLimit')
 const cors = require('cors')
 const cookieParser = require("cookie-parser");
 const path = require('path')
+const auth = require('./routes/auth')
 
 
 // const notFound = require('./middleware/not-found');
@@ -18,6 +19,7 @@ app.use(express.static(path.join(__dirname, "..", "build")));
 app.use(express.json());
 
 //routes
+app.use('/api/v1/auth', auth);
 app.use('/api/v1/tasks', tasks);
 
 // middleware 
@@ -26,8 +28,8 @@ app.use(notFound);
 app.use(errorHandler);
 // app.use(rateLimit);
 
-const port = process.env.PORT;
-// const port = 8090;
+// const port = process.env.PORT;
+const port = 8070;
 const start = async ()=>{
     try{
         await connectDB(process.env.MONGO_URI)

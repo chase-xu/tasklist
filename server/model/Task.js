@@ -4,9 +4,9 @@ const TaskSchema = new mongoose.Schema({
     text: {
         type: String,
         required: [true, 'Must provide task text'],
-        // trim: true,
+        trim: true,
         maxlength: [50, 'Task text should not be more than 50 characters']
     }
-})
+}, {timestamps: true})
 
 module.exports = mongoose.model('Task', TaskSchema) 

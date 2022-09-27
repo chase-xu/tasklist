@@ -15,7 +15,6 @@ const createTask = asyncWrapper(async (req, res)=>{
 })
 
 const deleteTask = asyncWrapper( async (req, res, next)=>{
-    console.log(req.params)
     const id = req.params.id
     try{
         const task = await Task.findOneAndDelete({_id: id})
