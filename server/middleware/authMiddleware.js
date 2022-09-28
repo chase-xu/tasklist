@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../model/users');
-
+require('dotenv').config();
 
 /* eslint-disable-next-line no-unused-vars */
 const auth= async (req, res, next)=> {
