@@ -12,45 +12,42 @@ import axios from 'axios';
 
 const Login =(props)=>{
 
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { isOpen, onOpen, onClose} = useDisclosure()
     const initialRef = React.useRef(null)
     const finalRef = React.useRef(null)
     const [show, setShow] = React.useState(false)
     const [user, setUser] = React.useState('')
     const [password, setPassword] = React.useState('')
 
-    const {userName, jwt} = useSelector((state)=>{
+    const {username, token, loggedin} = useSelector((state)=>{
         return state.userReducer
     })
     const toast = useToast();
-
     const dispatch = useDispatch();
-
     const handleClick=(e)=>{
         setShow(!show)
     }
-
     const handleLogin = async (e) =>{
         const payload = {
-            userName: user, 
+            username: user, 
             password: password 
         }
         try{
-            const res = await axios.post('http://localhost:8090/api/v1/login', payload)
+            const res = await axios.post('/api/v1/auth/login', payload)
             .catch(err=>{
                 throw err;
             });
             if (res) {
-                dispatch({type: 'user/login', payload: {userName: user, token: res.data.token }});
+                dispatch({type: 'user/login', payload: {username: user, token: res.data.token }});
                 toast({
                     title: 'Login',
                     description: 'login success',
                     status: 'success',
                     duration: 9000,
                     isClosable: true,
-                  })
-            };
-
+                });
+                onClose();
+            }
 
         }catch(err){
             toast({
@@ -59,7 +56,7 @@ const Login =(props)=>{
                 status: 'error',
                 duration: 9000,
                 isClosable: true,
-              })
+            });
         }
 
     }
@@ -69,6 +66,28 @@ const Login =(props)=>{
     const handlePassword=(e)=>{
         setPassword(e.target.value);
     }
+    const handleLogout=(e)=>{
+        if(loggedin){
+            try{
+                dispatch({type: 'user/logout'});
+                toast({
+                    title: 'Logout',
+                    description: 'logged out successful',
+                    status: 'success',
+                    duration: 9000,
+                    isClosable: true,
+                  })
+            } catch(err){
+                toast({
+                    title: 'Logout Error',
+                    description: err.message,
+                    status: 'error',
+                    duration: 9000,
+                    isClosable: true,
+                  })
+            }
+        }
+    }
 
     return (
         <div className={styles['container']}>
@@ -77,9 +96,22 @@ const Login =(props)=>{
             <Box as='button' borderRadius='md' bg='white' color='black' px={6} h={9} border='solid' >
                 Contact to ask for a user account
             </Box>
-            <Box onClick={onOpen} as='button' borderRadius='md' bg='black' color='white' px={6} h={9}>
-                Login
-            </Box>
+            {loggedin ? 
+                <React.Fragment>
+                    <Box onClick={handleLogout} as='button' borderRadius='md' bg='black' color='white' px={6} h={9}>
+                        Logout
+                    </Box>
+                </React.Fragment>
+                :
+                <React.Fragment>
+                    <Box onClick={onOpen} as='button' borderRadius='md' bg='black' color='white' px={6} h={9}>
+                        Login
+                    </Box>
+                </React.Fragment>
+            }
+
+            
+
 
         {/** Modal for loging in */}
         <Modal

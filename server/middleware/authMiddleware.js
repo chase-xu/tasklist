@@ -11,7 +11,7 @@ const auth= async (req, res, next)=> {
         return next(err);
       }
       const user = await User.findById(decoded.id).exec();
-      if(!user) return next(new Error('User not Found with provided token.'))
+      if(!user) return next()
       req.user = user.toJSON();
       return next();
     });
