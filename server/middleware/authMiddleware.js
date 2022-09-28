@@ -6,7 +6,7 @@ require('dotenv').config();
 const auth= async (req, res, next)=> {
   const token = req.headers['x-access-token'];
   if (token) {
-    jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+    jwt.verify(token, `${process.env.JWT_SECRET}`, async (err, decoded) => {
       if (err) {
         return next(err);
       }
