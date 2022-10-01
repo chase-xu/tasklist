@@ -28,8 +28,9 @@ function App() {
     return state.taskReducer.tasks
   })
   const dispatch = useDispatch();
-  const [initRender, setInitRender] = React.useState(true)
+  const [initRender, setInitRender] = React.useState(true);
   const toast = useToast();
+  
 
   React.useEffect(()=>{
     if(initRender) {
@@ -102,6 +103,7 @@ function App() {
             minHeight: '20em',
             borderBottom: '16px solid',
             borderRight: '12px solid'}}>
+              {/* <Taskbar desc={{text: 'test', _id: '1234'}} key={1} /> */}
               {tasks === undefined || tasks.length === 0   ? <></> : tasks.map((task, index)=> 
                     <Taskbar desc={task} key={index}/>
               )}

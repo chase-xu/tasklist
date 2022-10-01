@@ -1,0 +1,87 @@
+.text{
+    font-family: 'Sylfaen';
+}
+
+.text:hover{
+    font-family: 'Sylfaen';
+    border: black solid;
+}
+
+
+:root{
+    --animationSize: 90%;
+    --animationColor: None;
+    --animation: None;
+}
+
+@keyframes grow {
+    from {
+        width: var(--animationSize);
+    }
+    to {
+        background-color:aliceblue;
+        width: 100%;
+    }
+}
+
+/* @keyframes shrink{
+    from {
+        background-color:aliceblue;
+        width: var(--animationSize);
+    }
+    to {
+        width: 90%;
+    }
+} */
+
+/* .stack_1{
+    width: var(--animationSize);
+    background-color: var(--animationColor);
+    animation-name: shrink;
+    animation-duration:  3s;
+} */
+
+.stack{
+    width: var(--animationSize);
+    background-color: var(--animationColor);
+}
+
+.stack:hover{
+    background-color: aliceblue;
+    animation-name: grow;
+    animation-duration: 3s;
+    animation-fill-mode: both;
+}
+
+
+/* @keyframes grow {
+    from {
+        width: 90%;
+    }
+    to {
+        background-color:aliceblue;
+        width: 100%;
+    }
+}
+
+@keyframes shrink{
+    from {
+        background-color:aliceblue;
+        width: var();
+    }
+    to {
+        width: 90%;
+    }
+}
+
+.stack{
+    width: 90%;
+    animation: shrink 3s;
+}
+
+.stack:hover{
+    background-color: aliceblue;
+    animation-name: grow;
+    animation-duration: 3s;
+    animation-fill-mode: both;
+} */
