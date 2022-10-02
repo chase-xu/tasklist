@@ -7,7 +7,7 @@
 
 :root{
     --animationSize: 90%;
-    --animationColor: None;
+    --animationColor: ghostwhite;
     --animation: None;
 }
 
@@ -16,15 +16,14 @@
         width: var(--animationSize);
     }
     to {
-        background-color:aliceblue;
+        background-color: var(--animationColor);
         width: 100%;
     }
 }
 
 @keyframes shrink{
     from {
-        background-color:aliceblue;
-        width: 100%;
+        background-color:var(--animationColor);
     }
     to {
         width: 90%;
@@ -33,17 +32,14 @@
 
 .stack[animation='1']{
     width: var(--animationSize);
-    background-color: var(--animationColor);
-    animation:grow 2s both;
+    animation:grow 2s forwards;
 }
 
 .stack[animation='0']{
     width: var(--animationSize);
-    background-color: var(--animationColor);
 }
 
 .stack[animation='3']{
-    width: 90%;
-    background-color: var(--animationColor);
+    width: var(--animationSize);
     animation: shrink 2s both;
 }

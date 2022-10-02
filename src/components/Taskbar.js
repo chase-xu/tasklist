@@ -10,18 +10,17 @@ const Feature=({ text, _id, ...rest })=> {
 
     const dispatch = useDispatch();
     const toast = useToast();
-    const inputRef = React.useRef(null);
     const boxRef = React.useRef(null);
+    const closeRef = React.useRef(null);
     const focusRef = React.useRef(null);
     const [isEditing, setIsEditing] = React.useState(false);
     const [taskString, setTaskString] = React.useState(text);
-    // const useStyle = styles[]
     const [animation, setAnimation] = React.useState('0');
+    
 
     const handleClick = async (event)=>{
 
         try{
-            
             const res = await axios.delete(`/api/v1/tasks/delete/${_id}`, {_id: _id, text: text})
             // console.log(` return is ${res.data.data}`)
             if(res.data.data){
@@ -50,12 +49,20 @@ const Feature=({ text, _id, ...rest })=> {
     }
 
     const handleTextClick=(e)=>{
-        // e.preventDefault();
-        if(boxRef.current && boxRef.current.contains(e.target)){
+        if(boxRef.current && boxRef.current.contains(e.target) && !closeRef.current.contains(e.target)){
             setIsEditing(true);
         } else{
+            if(isEditing) {
+                setIsEditing(false)
+                setAnimation(3);
+            }
+        }
+    }
+
+    const handleEnter =e=>{
+        if(e.key === 'Enter'){
+            dispatch({type: 'tasks/edit', payload: {_id: _id, text: taskString}});
             setIsEditing(false)
-            setAnimation(3);
         }
     }
 
@@ -66,6 +73,11 @@ const Feature=({ text, _id, ...rest })=> {
         };
       });
     
+    // const handleInputOnLoad=e=>{
+    //     console.log('in onload')
+    //     e.target.focus();
+    //     focusRef.current.focus();
+    // }
    
     return (
 
@@ -80,8 +92,11 @@ const Feature=({ text, _id, ...rest })=> {
                 }}
                 animation={animation}
             >
-                <Box p={6} shadow='md'  borderWidth='1px' {...rest} style={{display: 'flex', justifyContent: 'space-between'}} >
-                    {/* <div style={{border: 'solid black'}}> */}
+                <Box p={6} shadow='md'  borderWidth='1px' {...rest} 
+                style={{display: 'flex', 
+                    border: 'solid black',
+                    justifyContent: 'space-between'}} >
+
                     {!isEditing ?
                         <Text className={styles['text']}  
                             mt={1}
@@ -89,16 +104,18 @@ const Feature=({ text, _id, ...rest })=> {
                                 setIsEditing(true);
                             }}
                             >{taskString} </Text> :
-                        <Input
+                        <Input  
+                                autoFocus={true}
                                 value={taskString}
                                 onChange={handleChange}
                                 size='sm'
-                                autoFocus
-                                ref = {focusRef}
+                                onKeyUp={handleEnter}   
+                                type='text'                                               
                         />
                         }
-                    {/* </div> */}
-                    <CloseButton size='md'  style={{}} onClick={handleClick}/>
+                    <CloseButton size='lg'
+                        ref={closeRef}
+                        onClick={handleClick}/>
                 </Box>
             </div>
     )
