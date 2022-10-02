@@ -50,7 +50,7 @@ const Feature=({ text, _id, ...rest })=> {
     }
 
     const handleTextClick=(e)=>{
-        e.preventDefault();
+        // e.preventDefault();
         if(boxRef.current && boxRef.current.contains(e.target)){
             setIsEditing(true);
         } else{
