@@ -10,12 +10,13 @@ const Feature=({ text, _id, ...rest })=> {
 
     const dispatch = useDispatch();
     const toast = useToast();
-    const inputRef = React.useRef();
-    const boxRef = React.useRef();
+    const inputRef = React.useRef(null);
+    const boxRef = React.useRef(null);
+    const focusRef = React.useRef(null);
     const [isEditing, setIsEditing] = React.useState(false);
     const [taskString, setTaskString] = React.useState(text);
     // const useStyle = styles[]
-    // const [animation, setAnimation] = React.useState('90%');
+    const [animation, setAnimation] = React.useState('0');
 
     const handleClick = async (event)=>{
 
@@ -49,47 +50,57 @@ const Feature=({ text, _id, ...rest })=> {
     }
 
     const handleTextClick=(e)=>{
-        console.log(inputRef);
-        if (inputRef.current && inputRef.current.contains(e.target)){
-            // inside click
+        e.preventDefault();
+        if(boxRef.current && boxRef.current.contains(e.target)){
             setIsEditing(true);
         } else{
-            setIsEditing(false);
+            setIsEditing(false)
+            setAnimation(3);
         }
     }
 
     React.useEffect(() => {
-        // add when mounted
         document.addEventListener("mousedown", handleTextClick);
-        // return function to be called when unmounted
         return () => {
-          document.removeEventListener("mousedown", handleClick);
+          document.removeEventListener("mousedown", handleTextClick);
         };
       });
     
    
     return (
-    
+
             <div 
-            className={styles['stack']}
-            ref = {boxRef}
+                className={styles['stack']}
+                ref = {boxRef}
+                onMouseEnter={e=>{
+                    setAnimation(1);
+                }}
+                onMouseLeave={e=>{
+                    if(!isEditing) setAnimation(3);
+                }}
+                animation={animation}
             >
                 <Box p={6} shadow='md'  borderWidth='1px' {...rest} style={{display: 'flex', justifyContent: 'space-between'}} >
-                    {!isEditing ? 
-                    <Text className={styles['text']} ref={inputRef} onClick={handleTextClick}  mt={1}
-                    // onMouseEnter={()=>{setIsEditing(true)}} onMouseLeave={()=>{setIsEditing(false)}}
-                    >{taskString}</Text> :
-                    <Input
-                        value={taskString}
-                        onChange={handleChange}
-                        size='sm'
-                        // onMouseLeave={()=>{setIsEditing(false)}}
-                    />
-                    }
+                    {/* <div style={{border: 'solid black'}}> */}
+                    {!isEditing ?
+                        <Text className={styles['text']}  
+                            mt={1}
+                            onClick={(e)=>{
+                                setIsEditing(true);
+                            }}
+                            >{taskString} </Text> :
+                        <Input
+                                value={taskString}
+                                onChange={handleChange}
+                                size='sm'
+                                autoFocus
+                                ref = {focusRef}
+                        />
+                        }
+                    {/* </div> */}
                     <CloseButton size='md'  style={{}} onClick={handleClick}/>
                 </Box>
             </div>
-        // </ReactCSSTransitionGroup>
     )
   }
   

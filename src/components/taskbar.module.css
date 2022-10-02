@@ -1,11 +1,8 @@
 .text{
+    width: 90%;
     font-family: 'Sylfaen';
 }
 
-.text:hover{
-    font-family: 'Sylfaen';
-    border: black solid;
-}
 
 
 :root{
@@ -24,64 +21,29 @@
     }
 }
 
-/* @keyframes shrink{
-    from {
-        background-color:aliceblue;
-        width: var(--animationSize);
-    }
-    to {
-        width: 90%;
-    }
-} */
-
-/* .stack_1{
-    width: var(--animationSize);
-    background-color: var(--animationColor);
-    animation-name: shrink;
-    animation-duration:  3s;
-} */
-
-.stack{
-    width: var(--animationSize);
-    background-color: var(--animationColor);
-}
-
-.stack:hover{
-    background-color: aliceblue;
-    animation-name: grow;
-    animation-duration: 3s;
-    animation-fill-mode: both;
-}
-
-
-/* @keyframes grow {
-    from {
-        width: 90%;
-    }
-    to {
-        background-color:aliceblue;
-        width: 100%;
-    }
-}
-
 @keyframes shrink{
     from {
         background-color:aliceblue;
-        width: var();
+        width: 100%;
     }
     to {
         width: 90%;
     }
 }
 
-.stack{
-    width: 90%;
-    animation: shrink 3s;
+.stack[animation='1']{
+    width: var(--animationSize);
+    background-color: var(--animationColor);
+    animation:grow 2s both;
 }
 
-.stack:hover{
-    background-color: aliceblue;
-    animation-name: grow;
-    animation-duration: 3s;
-    animation-fill-mode: both;
-} */
+.stack[animation='0']{
+    width: var(--animationSize);
+    background-color: var(--animationColor);
+}
+
+.stack[animation='3']{
+    width: 90%;
+    background-color: var(--animationColor);
+    animation: shrink 2s both;
+}
