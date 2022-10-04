@@ -7,7 +7,7 @@
 
 :root{
     --animationSize: 90%;
-    --animationColor: ghostwhite;
+    --animationColor: rgba(235, 235, 246, 0.958);
     --animation: None;
 }
 

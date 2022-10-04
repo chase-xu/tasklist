@@ -14,7 +14,7 @@ const  getAllTasks=()=> {
   return async dispatch => {
       try {
           const  res = await axios.get("/api/v1/tasks")
-          dispatch({type: 'task/getAll', payload: res.data}) //store first five posts
+          dispatch({type: 'task/getAll', payload: res.data})
       }
       catch(e){
           console.log(e)

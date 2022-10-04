@@ -63,21 +63,24 @@ const Feature=({ text, _id, ...rest })=> {
         if(e.key === 'Enter'){
             dispatch({type: 'tasks/edit', payload: {_id: _id, text: taskString}});
             setIsEditing(false)
+            toast({
+                title: 'Task Edited',
+                description: 'Task Edited Successfully',
+                status: 'success',
+                duration: 9000,
+                isClosable: true,
+              }) 
         }
     }
 
     React.useEffect(() => {
+
         document.addEventListener("mousedown", handleTextClick);
         return () => {
           document.removeEventListener("mousedown", handleTextClick);
         };
       });
     
-    // const handleInputOnLoad=e=>{
-    //     console.log('in onload')
-    //     e.target.focus();
-    //     focusRef.current.focus();
-    // }
    
     return (
 
@@ -104,14 +107,15 @@ const Feature=({ text, _id, ...rest })=> {
                                 setIsEditing(true);
                             }}
                             >{taskString} </Text> :
-                        <Input  
-                                autoFocus={true}
+                        <Input 
+                                className='Input'
+                                autoFocus
+                                ref={focusRef} 
+                                size='sm'
                                 value={taskString}
                                 onChange={handleChange}
-                                size='sm'
-                                onKeyUp={handleEnter}   
-                                type='text'                                               
-                        />
+                                onKeyUp={handleEnter}                                  
+                        ></Input>
                         }
                     <CloseButton size='lg'
                         ref={closeRef}
