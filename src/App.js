@@ -4,57 +4,80 @@ import './App.css';
 import {Switch} from 'react-router-dom';
 import Inputbar from './components/Inputbar';
 import Taskbar from './components/Taskbar';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector, useDispatch, shallowEqual, useStore} from 'react-redux';
 import axios from 'axios';
 import {useToast} from '@chakra-ui/react';
 import Login from './components/Login';
 
 
-const  getAllTasks=()=> {
-  return async dispatch => {
-      try {
-          const  res = await axios.get("/api/v1/tasks")
-          dispatch({type: 'task/getAll', payload: res.data})
-      }
-      catch(e){
-          console.log(e)
-      }
-  }
-}
+// const  getAllTasks=()=> {
+//   return async dispatch => {
+//       try {
+//           // const res = await axios.get("/api/v1/tasks"); 
+//           // const data = res.data
+//         // const data = [{text: 'test1', _id: '1234'}, {text: 'test2', _id: '1234'},
+//         // {text: 'test3', _id: '1234'}]
+//           // dispatch({type: 'task/getAll', payload: data});
+//       }
+//       catch(e){
+//           console.log(e)
+//       }
+//   }
+// }
 
 function App() {
 
   const tasks = useSelector((state)=>{
-    return state.taskReducer.tasks
-  })
+    return state.taskReducer.tasks;
+  });
+
+  const store = useStore();
   const dispatch = useDispatch();
   const [initRender, setInitRender] = React.useState(true);
   const toast = useToast();
+  // const 
   
+  const  getAllTasks=()=> {
+    // return async dispatch => {
+        // try {
+            // const res = await axios.get("/api/v1/tasks"); 
+            // const data = res.data
+          // const data = [{text: 'test1', _id: '1234'}, {text: 'test2', _id: '1234'},
+          // {text: 'test3', _id: '1234'}]
+          // const data = [{text: 'test1', _id: '123sd4',index: 0}, {text: 'test2', _id: '123dfdsf4', index: 1},
+          // {text: 'test3', _id: '1sdfasd234', index:2}]
+          //   dispatch({type: 'task/getAll', payload: data});
+        // }
+        // catch(e){
+        //     console.log(e)
+        // }
+    // }
+  }
 
   React.useEffect(()=>{
-    if(initRender) {
-      try{
-        dispatch(getAllTasks())
-      }catch(e){
-        console.log(e)
-        toast({
-          title: e.message,
-          description: e.response.data.msg,
-          status: 'error',
-          duration: 9000,
-          isClosable: true,
-        })
-      }
-      setInitRender(false)
-    };
-  },[initRender, tasks, dispatch])
+    console.log(tasks)
+    // if(initRender) {
+    //   try{
+    //     getAllTasks()
+    //   //  dispatch(getAllTasks())
+    //   }catch(e){ 
+    //     console.log(e)
+    //     toast({
+    //       title: e.message,
+    //       description: e.response.data.msg,
+    //       status: 'error',
+    //       duration: 9000,
+    //       isClosable: true,
+    //     })
+    //   }
+    //   setInitRender(false)
+    // };
+  })
 
   
 
   return (
-    <Switch>
-      <React.Fragment >
+    <div>
       <div>
         <div style={{
           display: 'flex',
@@ -96,7 +119,6 @@ function App() {
         <div>
           <Inputbar />
         </div>
-        <React.Fragment>
           <div className='App' style={{
             border: '1px solid',
             marginTop: '5%',
@@ -104,15 +126,16 @@ function App() {
             borderBottom: '16px solid',
             borderRight: '12px solid'}}>
               {/* <Taskbar desc={{text: 'test', _id: '1234'}} key={1} /> */}
-              {tasks === undefined || tasks.length === 0   ? <></> : tasks.map((task, index)=> 
-                    <Taskbar desc={task} key={index}/>
-              )}
+              {/* <Taskbar desc={{text: 'test', _id: '1234'}} key={2} /> */}
+              {(tasks === undefined || tasks.length === 0)   ? <></> : 
+              tasks.map((task, index)=> 
+                    <Taskbar desc={task} key={index} index={index}/>
+              )
+              }
           </div>
-        </React.Fragment>
       </div>
       </div>
-      </React.Fragment>
-    </Switch>
+    </div>
   );
 }
 
