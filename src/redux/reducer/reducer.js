@@ -31,7 +31,7 @@ const taskReducer = createReducer(initialState, async (builder) => {
         const data = state.tasks.filter(item=>{
             return item._id !== action.payload._id
         })
-        return {...state, tasks: data}
+        return {...state, tasks: [...data]}
       } catch(err){
         console.log(err)
       }
