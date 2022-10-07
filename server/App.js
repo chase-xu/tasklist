@@ -12,8 +12,7 @@ const path = require('path')
 const auth = require('./routes/auth')
 
 
-// const notFound = require('./middleware/not-found');
-// const errorHandlerMiddleware = require('./middleware/error-handler');
+
 app.use(cors());
 app.use(express.static(path.join(__dirname, "..", "build")));
 app.use(express.json());
@@ -29,7 +28,7 @@ app.use(errorHandler);
 // app.use(rateLimit);
 
 const port = process.env.PORT;
-// const port = 8070;
+// const port = 8888;
 const start = async ()=>{
     try{
         await connectDB(process.env.MONGO_URI)
