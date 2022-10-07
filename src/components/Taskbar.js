@@ -58,8 +58,6 @@ const Feature=({ text, _id, index, ...rest })=> {
 
     const handleEnter =e=>{
         if(e.key === 'Enter'){
-            console.log(e.target.vaule)
-            console.log(taskString)
             dispatch({type: 'task/edit', payload: {_id: _id, text: taskString}});
             setIsEditing(false)
             setTaskString('')
