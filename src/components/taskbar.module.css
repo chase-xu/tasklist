@@ -9,6 +9,8 @@
     --animationSize: 90%;
     --animationColor: rgba(235, 235, 246, 0.958);
     --animation: None;
+    --transformDown: 20px;
+    --tranformUp: 20px;
 }
 
 @keyframes grow {
@@ -42,4 +44,20 @@
 .stack[animation='3']{
     width: var(--animationSize);
     animation: shrink 2s both;
+}
+
+.stack[animation='down']{
+    width: var(--animationSize);
+    transition-property:  transform;
+    transition-duration: 2s;
+    transition-timing-function: ease;
+    transform: translateY(var(--transformDown));
+}
+
+.stack[animation='up']{
+    width: var(--animationSize);
+    transition-property:  transform;
+    transition-duration: 2s;
+    transition-timing-function: ease;
+    transform: translateY(var(--transformUp));
 }
