@@ -2,6 +2,7 @@
 
 
 FROM node:19-alpine3.15
+## ARGs need to be inside of FROM, or the ENV would not catch it.
 ARG PORT=8080
 ARG MONGO_URI
 ARG JWT_SECRET
