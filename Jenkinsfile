@@ -25,10 +25,10 @@ pipeline {
                 variable: 'JWT'
               )
           ]) {
-            // print URI.path
-            def img = docker.build('cpxu-tasklist:latest', "--build-arg MONGO_URI='${MURI}'  --build-arg JWT_SECRET=${JWT} ./")
-            img.push()
-              
+            docker.withRegistry('', 'docker'){
+                def img = docker.build('chaseatdocker/cpxu-tasklist:latest', "--build-arg MONGO_URI='${MURI}'  --build-arg JWT_SECRET=${JWT} ./")
+                img.push()
+            }
           }
         }
       }
