@@ -4,7 +4,7 @@ FROM node:19-alpine3.15
 WORKDIR /app
 COPY package*.json ./ 
 RUN echo "running npm install ..."
-RUN npm ci --only=production --omit=dev
+RUN npm ci --omit=dev
 RUN echo "Finished npm install"
 
 COPY . ./
