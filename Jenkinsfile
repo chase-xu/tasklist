@@ -15,6 +15,21 @@ pipeline {
       }
       steps{
         echo "building ..."
+        script{
+          withCredentials([
+              string(
+                credentialsId: 'MONGO_URI',
+                variable: 'URI'),
+              string(
+                credentialsId: 'JWT_SECRET',
+                variable: 'JWT'
+              )
+          ]) {
+            def img = docker.build('cpxu-tasklist:latest', "--build-arg MONGO_URI=${URI} JWT_SECRET=${JWT} ./")
+            img.push()
+              
+          }
+        }
       }
     }
     stage('test'){
