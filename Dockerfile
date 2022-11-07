@@ -1,6 +1,6 @@
 
 
-FROM node
+FROM node:19-alpine
 WORKDIR /app
 COPY package*.json ./ 
 RUN echo "running npm install ..."
