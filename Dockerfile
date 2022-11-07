@@ -6,7 +6,7 @@ COPY package*.json ./
 RUN npm ci --only=production --omit=dev
 
 COPY . ./
-RUN npm build
+RUN npm run build
 RUN npm start
 
 EXPOSE 8080
