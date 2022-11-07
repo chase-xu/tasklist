@@ -19,14 +19,14 @@ pipeline {
           withCredentials([
               string(
                 credentialsId: 'MONGO_URI',
-                variable: 'URI'),
+                variable: 'MURI'),
               string(
                 credentialsId: 'JWT_SECRET',
                 variable: 'JWT'
               )
           ]) {
-            print URI
-            def img = docker.build('cpxu-tasklist:latest', "--build-arg MONGO_URI=${URI} JWT_SECRET=${JWT} ./")
+            // print URI.path
+            def img = docker.build('cpxu-tasklist:latest', "--build-arg MONGO_URI=\'${MURI}\'  --build-arg JWT_SECRET=${JWT} ./")
             img.push()
               
           }
