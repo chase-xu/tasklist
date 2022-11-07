@@ -25,6 +25,7 @@ pipeline {
                 variable: 'JWT'
               )
           ]) {
+            print URI
             def img = docker.build('cpxu-tasklist:latest', "--build-arg MONGO_URI=${URI} JWT_SECRET=${JWT} ./")
             img.push()
               
