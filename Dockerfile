@@ -8,6 +8,10 @@ ENV MONGO_URI=MONGO_URI
 ENV JWT_SECRET=JWT_SECRET
 ENV PORT=PORT
 
+RUN echo MONGO_URI
+RUN echo PORT
+RUN echo JWT_SECRET
+
 WORKDIR /app
 COPY package*.json ./ 
 RUN echo "running npm install ..."
