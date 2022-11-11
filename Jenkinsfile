@@ -52,7 +52,7 @@ pipeline {
       steps{
         echo "deploying ..."
         echo "starting docker container"
-        sh 'docker-compose -f docker-compose.yml up'
+        sh 'docker-compose -f docker-compose.yml up -d'
         echo "dcoker container started"
         echo "finished deploying"
       }
