@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  tasklist:
+    image: chaseatdocker/cpxu-tasklist:latest
+    build: ./
+    ports:
+      - 8333:8080
+    environment:
+      PORT: 8080
+
+  
