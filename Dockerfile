@@ -10,6 +10,7 @@ ARG JWT_SECRET
 ENV MONGO_URI=$MONGO_URI
 ENV JWT_SECRET=$JWT_SECRET
 ENV PORT=$PORT
+ENV NODE_ENV=production
 
 RUN echo $MONGO_URI
 RUN echo $PORT
@@ -27,5 +28,6 @@ RUN npm run build
 RUN echo "Finished run build ..."
 RUN echo "running npm start"
 RUN echo "Finished running npm start"
+CMD ["npm", "start"]
 
 EXPOSE $PORT
