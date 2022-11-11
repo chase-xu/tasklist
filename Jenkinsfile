@@ -51,6 +51,10 @@ pipeline {
       }
       steps{
         echo "deploying ..."
+        echo "starting docker container"
+        sh 'docker-compose -f docker-compose.yml up'
+        echo "dcoker container started"
+        echo "finished deploying"
       }
     }
   }
